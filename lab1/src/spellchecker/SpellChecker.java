@@ -18,7 +18,7 @@ public class SpellChecker {
     private static final String HYPHEN = "-";
     private static final String EMPTY_STRING = "";
     private static final String DICTIONARY_FILE = "../data/words.txt"; 
-	private static final String MISTAKE_FILE_NAME = "../data/spellingmistakes.txt";
+    private static final String MISTAKE_FILE_NAME = "../data/spellingmistakes.txt";
     private static final String NO_MISTAKE_FILE_NAME = "../data/declarationofindependence.txt";
     private static final String REGEX_FOR_REPLACEMENT = "[^a-z\\sA-Z]";
     
