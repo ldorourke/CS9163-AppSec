@@ -1,0 +1,65 @@
+lab1/.metadata/
+lab1/.recommenders/
+;;extensions to ignore
+
+*.idea 
+
+*.log
+
+*.pot
+
+*.pyc
+
+ 
+
+*.db
+
+.idea/
+
+ 
+
+ 
+
+### OSX template
+
+.DS_Store
+
+.AppleDouble
+
+.LSOverride
+
+ 
+
+# Icon must end with two \r
+
+Icon
+
+ 
+
+# Translations
+
+*.mo
+
+*.pot
+
+ 
+
+# Django stuff:
+
+*.log
+
+ 
+
+venv/
+
+logs/
+
+run/
+
+staticfiles/
+
+ 
+
+### Linux template
+
+*~
