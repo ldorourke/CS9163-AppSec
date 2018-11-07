@@ -12,7 +12,7 @@ website: $(INCS) $(HTML_FILES)
 
 # the rest of these targets may need to be tweaked for this project:
 container:
-	docker build -t scheduler docker
+	docker build -t appsec docker
 
 
 dblocal:
