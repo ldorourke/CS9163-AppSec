@@ -2,10 +2,69 @@
 
 {% block content %}
 
-    <h1>AppSec</h1>
-    <p>
-        I just copy and pasted this project from another lol
-    </p>
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
+	<h1>Please upload a csv file or submit in the text box</h1>
+	
+    <form role="form" action="" method="post" onsubmit="showHidden(); findErrors(); return false;">{% csrf_token %}
+    	<p>
+			<input type="file" accept="text/plain" id="fileToCheck" onchange="displayFile(event)" size="40">
+        	<br>
+        	<textarea id="textbox" style="width:400px;height:150px;"></textarea>
+        	<br>
+        	<button type="submit" value="" name="submit" onsubmit="showHidden()">Show Errors</button>
+		</p>
+    </form>
+
+    <div id="hidden_div" style="display:none">
+	<p>Errors: </p>
+		<p id="errors" style="max-width:80vw"></p>
+	</div>
+
+    <script>
+
+		function displayFile(event) {
+			var file = event.target.files[0];
+			var fileReader = new FileReader();
+			fileReader.onload = function(evt) { 
+	      		var contents = evt.target.result;
+	      		document.getElementById("textbox").innerHTML = contents;
+		    }
+			var res = fileReader.readAsText(file);
+		}
+
+		 function showHidden() {
+		   var div = document.getElementById("hidden_div");
+		   if (div.style.display == 'none') {
+		     div.style.display = '';
+		   }
+
+		 }
+
+		 function doSpellCheck(event) {
+			document.getElementById("errors").innerHTML = "hi";
+		 }
+
+		 function findErrors() {
+		 	var headers = {};
+		 	var csrftoken = jQuery("[name=csrfmiddlewaretoken]").val();
+			headers['Authorization'] = csrftoken;
+		    $.ajax( {
+		      type: "POST",
+		      cache: false,
+		      url: "appsec/performspellcheck",
+		      data: {
+		      	data:JSON.stringify(document.getElementById('textbox').innerHTML),
+		      	csrfmiddlewaretoken: $("input[name='csrfmiddlewaretoken']").val(),
+		      },
+		      contentType: "application/x-www-form-urlencoded",
+        	  dataType: "json",
+		      success: function(data) {
+		        document.getElementById("errors").innerHTML = data["errors"];
+		      }
+		    })
+		  };
+
+	</script>
 
 {% endblock content %}
