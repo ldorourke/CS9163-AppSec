@@ -4,8 +4,7 @@
 
 {% if user.is_authenticated %}
 
-	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
-
+	<!-- HTML code -->
 	<h1>Please upload a csv file or submit in the text box</h1>
 	
     <form role="form" action="" method="post" onsubmit="showHidden(); findErrors(); return false;">{% csrf_token %}
@@ -23,8 +22,9 @@
 		<p id="errors" style="max-width:80vw"></p>
 	</div>
 
+	<!-- JavaScript functions -->
+	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
     <script>
-
 		function displayFile(event) {
 			var file = event.target.files[0];
 			var fileReader = new FileReader();
@@ -66,7 +66,6 @@
 		      }
 		    })
 		  };
-
 	</script>
 
 {% else %}
