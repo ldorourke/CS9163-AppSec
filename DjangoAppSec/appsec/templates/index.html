@@ -2,6 +2,8 @@
 
 {% block content %}
 
+{% if user.is_authenticated %}
+
 	<script type="text/javascript" src="http://code.jquery.com/jquery-1.7.1.min.js"></script>
 
 	<h1>Please upload a csv file or submit in the text box</h1>
@@ -66,5 +68,13 @@
 		  };
 
 	</script>
+
+{% else %}
+	<p>	You are not logged in<br>
+  		<a href="{% url 'login' %}">Login</a><br>
+  		<a href="signup">Sign Up</a>
+  	</p>
+{% endif %}
+
 
 {% endblock content %}

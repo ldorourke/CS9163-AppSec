@@ -21,6 +21,7 @@ from appsec import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('accounts/', include('django.contrib.auth.urls')),
     url('', include('appsec.urls')),
     url('index/$', views.index),
 ]

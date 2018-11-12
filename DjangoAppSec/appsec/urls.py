@@ -9,5 +9,6 @@ urlpatterns = [
     url(r'^$', views.index, name='index'),
     url(r'^appsec/index/*$', views.index, name='index'),
     url(r'^appsec/performspellcheck/*$', views.performspellcheck, name='performspellcheck'),
+    path('signup/', views.SignUp.as_view(), name='signup'),
 ]
  

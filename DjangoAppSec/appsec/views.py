@@ -6,9 +6,18 @@ from django.shortcuts import redirect
 from django.template import loader
 from django import forms
 from django.views.decorators.csrf import csrf_protect
+from django.contrib.auth.forms import UserCreationForm
+from django.urls import reverse_lazy
+from django.views import generic
 import re
 
 site_hdr = "AppSec"
+
+
+class SignUp(generic.CreateView):
+    form_class = UserCreationForm
+    success_url = reverse_lazy('login')
+    template_name = 'signup.html'
 
 def index(request):
     return render(request, 'index.html', {'header': site_hdr})
