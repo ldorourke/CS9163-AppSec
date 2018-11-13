@@ -4,15 +4,12 @@ class CustomPasswortValidator:
 
     def validate(value):
 
-      # check for digit
-      if not any(char.isdigit() for char in value):
-          raise ValidationError(_('Password must contain at least 1 digit.'))
+      #Protect against brute force attacks
+      common_passwords = [line.rstrip('\n') for line in open('/home/djangoappsec/appsec/data/commonPasswords.txt')]
+      if value in common_passwords:
+        raise ValidationError(_('The password is too common.'))
 
-      # check for letter
-      if not any(char.isalpha() for char in value):
-          raise ValidationError(_('Password must contain at least 1 letter.'))
-
-      # check for special character
+      #Protect against SQL injections
       special_characters = "[~\!@#\$%\^&\*\(\)_\+{}\":;'\[\]]"
       if any(char in special_characters for char in value):
         raise ValidationError(_('Password cannot contain special characters'))
