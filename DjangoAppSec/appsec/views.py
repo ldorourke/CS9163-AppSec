@@ -9,7 +9,10 @@ from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
+from .models import PerformSpellCheck
 import re
+import time
+import datetime
 
 site_hdr = "AppSec"
 
@@ -25,11 +28,20 @@ def index(request):
 @csrf_protect
 def performspellcheck(request):
 	request_dict = request.POST.dict()
+	addToDb(request)
 	data = request_dict['data']
 	all_words = createDictionary()
 	error_list = checkFile(data, all_words)
 	formatted_list = format(error_list)
 	return JsonResponse({'errors': formatted_list})
+
+def addToDb(request):
+	if request.user.is_authenticated:
+		requestLog = PerformSpellCheck()
+		requestLog.uname = request.user.username
+		requestLog.created_at = datetime.datetime.fromtimestamp(time.time()).strftime('%Y-%m-%d %H:%M:%S')
+		requestLog.file_preview = request.POST.dict()['data']
+		requestLog.save()
 
 def createDictionary():
 	lines = [line.rstrip('\n').lower() for line in open('/home/djangoappsec/appsec/data/dictionary.txt')]

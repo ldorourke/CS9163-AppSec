@@ -1,11 +1,8 @@
 from django.contrib import admin
-from models import AuditEntr
-# Register your models here.
-from .models import User
+from .models import PerformSpellCheck, LoginAttempt
 
-admin.site.register(User)
+admin.site.register(PerformSpellCheck)
 
-@admin.register(AuditEntry)
-class AuditEntryAdmin(admin.ModelAdmin):
-    list_display = ['action', 'username', 'ip',]
-    list_filter = ['action',]
+@admin.register(LoginAttempt)
+class LoginAttemptAdmin(admin.ModelAdmin):
+    list_display = ['action', 'uname', 'timestamp', 'ip',]
