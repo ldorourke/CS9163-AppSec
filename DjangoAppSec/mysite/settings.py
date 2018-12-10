@@ -126,6 +126,7 @@ STATICFILES_DIRS = (
     )
 
 SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_SECURE = True
 EMAIL_BACKEND ='django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'testing@example.com'
 EMAIL_HOST_USER = ''
