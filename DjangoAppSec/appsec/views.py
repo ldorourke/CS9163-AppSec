@@ -39,6 +39,7 @@ def performspellcheck(request):
 	http_response['X-Frame-Options'] = 'deny'
 	http_response['X-Content-Type-Options'] = 'nosniff'
 	http_response['X-XSS-Protection'] = '1; mode=block'
+	http_response['Cache-Control'] = 'no-cache'
 	return http_response
 
 def addToDb(request):
