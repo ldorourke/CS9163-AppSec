@@ -10,6 +10,7 @@ from django.contrib.auth.forms import UserCreationForm
 from django.urls import reverse_lazy
 from django.views import generic
 from .models import PerformSpellCheck
+import json 
 import re
 import time
 import datetime
@@ -33,7 +34,11 @@ def performspellcheck(request):
 	all_words = createDictionary()
 	error_list = checkFile(data, all_words)
 	formatted_list = format(error_list)
-	return JsonResponse({'errors': formatted_list})
+	json_data = json.dumps({'errors': formatted_list})
+	http_response = HttpResponse(json_data)
+	http_response['X-Frame-Options'] = 'deny'
+	http_response['X-Content-Type-Options'] = 'nosniff'
+	return http_response
 
 def addToDb(request):
 	if request.user.is_authenticated:
