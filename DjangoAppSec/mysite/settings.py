@@ -125,6 +125,7 @@ STATICFILES_DIRS = (
     os.path.join(BASE_DIR, "mysite", "static", ),
     )
 
+SESSION_COOKIE_HTTPONLY = True
 EMAIL_BACKEND ='django.core.mail.backends.console.EmailBackend'
 DEFAULT_FROM_EMAIL = 'testing@example.com'
 EMAIL_HOST_USER = ''
